@@ -1,2 +1,2 @@
-# CMake
+# CMatrix
 A linear algebra library.
