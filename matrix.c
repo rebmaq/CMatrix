@@ -9,6 +9,7 @@ Matrix *matrix_init(int rows, int columns, Matrix *mat)
     for(int i = 0; i < rows; i++){
         mat->data[i] = calloc(columns, sizeof(double));
     }
+    // mat->data = calloc(rows*columns, sizeof(double));
     return mat;
 }
 
@@ -70,11 +71,11 @@ int size_check(Matrix *mat1, Matrix *mat2)
 {
     // Matrices are the same size
     if(mat1->number_of_rows == mat2->number_of_rows && mat1->number_of_columns == mat2->number_of_columns){
-        return 1;
+        return SAME_SIZE;
     }
     // Matricies are m x n and n x m
     if(mat1->number_of_rows == mat2->number_of_columns && mat1->number_of_columns == mat2->number_of_rows){
-        return 2;
+        return SWAPPED_SIZE;
     }
     return 0;
 }
@@ -90,7 +91,7 @@ void matrix_scale(Matrix *mat, double scalar)
 
 Matrix *add_matrices(Matrix *output, Matrix *mat1, Matrix *mat2)
 {
-    if(size_check(mat1, mat2) != 1){
+    if(size_check(mat1, mat2) != SAME_SIZE){
         return NULL;
     }
 

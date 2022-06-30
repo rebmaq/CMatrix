@@ -13,6 +13,8 @@ typedef struct matrix
     double **data;
 } Matrix;
 
+const int SAME_SIZE = 1;
+const int SWAPPED_SIZE = 2;
 
 /**
  * @brief Creates a Matrix and allocates memory for the Matrix
@@ -69,7 +71,7 @@ void matrix_print(Matrix *mat, int precision);
  * 
  * @param mat1 a pointer to a Matrix
  * @param mat2 a pointer to the Matrix to compare
- * @return int 1 if they are the same size, 2 if they mat1 is m by n and mat2 is n by m
+ * @return int SAME_SIZE if they are the same size, SWAPPED_SIZE if they mat1 is m by n and mat2 is n by m, 0 otherwise
  */
 int size_check(Matrix *mat1, Matrix *mat2);
 
@@ -95,14 +97,30 @@ Matrix *add_matrices(Matrix *mat1, Matrix *mat2, Matrix *output);
  * @brief Multiplies two Matrices
  * 
  * @param mat1 an n by m Matrix
- * @param mat2 ab n by p Matrix
+ * @param mat2 an m by p Matrix
  * @param output an uninitialized pointer to a Matrix 
  * @return Matrix* an n by p Matrix with the product of mat1 and mat2
  */
 Matrix *multiply_matrices(Matrix *mat1, Matrix *mat2, Matrix *output);
 
+/**
+ * @brief Raises a Matrix to a power
+ * 
+ * @param mat a pointer to a Matrix
+ * @param exponent the number to which to raise the Matrix
+ * @param output an uninitialized pointer to a Matrix
+ * @return Matrix* the resulting Matrix
+ */
 Matrix *matrix_pow(Matrix *mat, int exponent, Matrix *output);
 
+
+/**
+ * @brief Transposes a Matrix
+ * 
+ * @param mat a pointer to a Matrix
+ * @param output an unitialized pointer to a Matrix
+ * @return Matrix* the resulting Matrix
+ */
 Matrix *transpose(Matrix *mat, Matrix *output);
 
 Matrix *get_submatrix(Matrix *mat, Matrix *output);
