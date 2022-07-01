@@ -5,11 +5,12 @@ Matrix *matrix_init(int rows, int columns, Matrix *mat)
     mat = (Matrix *)malloc(sizeof(Matrix));
     mat->number_of_rows = rows;
     mat->number_of_columns = columns;
-    mat->data = malloc(rows*sizeof(double *));
-    for(int i = 0; i < rows; i++){
-        mat->data[i] = calloc(columns, sizeof(double));
+    mat->data = malloc(rows * sizeof(double *));
+    mat->data[0] = calloc(rows * columns, sizeof(double));
+    
+    for(int i = 1; i < rows; i++){
+        mat->data[i] = mat->data[i-1] + columns * sizeof(double);
     }
-    // mat->data = calloc(rows*columns, sizeof(double));
     return mat;
 }
 
@@ -52,8 +53,8 @@ void matrix_del(Matrix *mat)
 void matrix_print(Matrix *mat, int precision)
 {
     if(!mat){
-        printf("Matrix is NULL");
-        return -1;
+        printf("Matrix is NULL\n");
+        return;
     }
     
     printf("[\n");

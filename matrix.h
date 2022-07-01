@@ -13,8 +13,7 @@ typedef struct matrix
     double **data;
 } Matrix;
 
-const int SAME_SIZE = 1;
-const int SWAPPED_SIZE = 2;
+enum {SAME_SIZE = 1, SWAPPED_SIZE = 2};
 
 /**
  * @brief Creates a Matrix and allocates memory for the Matrix

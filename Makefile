@@ -8,3 +8,6 @@ matrix: matrix.c
 
 link:
 	gcc -o mat main.o matrix.o
+
+clean:
+	rm *.o

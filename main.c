@@ -22,10 +22,17 @@ int main(int argc, char **argv)
         {0, 1}
     };
 
+    double test[12] = {1, 2, 3, 4, 2, 3, 5, 7, 2, 4, 8, 19};
+
     Matrix *m;
     m = matrix_init(4, 3, m);
     matrix_edit(m, *data);
     matrix_print(m, 2);
+
+    Matrix *plz;
+    plz = matrix_init(3, 4, plz);
+    matrix_edit(plz, test);
+    matrix_print(plz, 0);
 
     Matrix *I_2x2;
     I_2x2 = matrix_init(2, 2, I_2x2);
