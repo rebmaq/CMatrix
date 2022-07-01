@@ -75,6 +75,15 @@ void matrix_print(Matrix *mat, int precision);
 int size_check(Matrix *mat1, Matrix *mat2);
 
 /**
+ * @brief Gets the identity Matrix
+ * 
+ * @param n the dimension of the row/column of the identity Matrix
+ * @param mat an uninitialized pointer to a Matrix
+ * @return Matrix* an n x n identity Matrix
+ */
+Matrix *get_identity(int n, Matrix* mat);
+
+/**
  * @brief Scales a matrix by a given scalar
  * 
  * @param mat a pointer to a Matrix
@@ -91,6 +100,16 @@ void matrix_scale(Matrix *mat, double scalar);
  * @return Matrix* the sum of mat1 and mat2
  */
 Matrix *add_matrices(Matrix *mat1, Matrix *mat2, Matrix *output);
+
+/**
+ * @brief Subtracts two Matrices
+ * 
+ * @param mat1 an n by m Matrix from which to subtrct
+ * @param mat2 a n by m Matrix to subtract
+ * @param output an uninitialized pointer to a Matrix 
+ * @return Matrix* the difference of mat1 and mat2
+ */
+Matrix *subtract_matrices(Matrix *mat1, Matrix *mat2, Matrix *output);
 
 /**
  * @brief Multiplies two Matrices
@@ -122,6 +141,30 @@ Matrix *matrix_pow(Matrix *mat, int exponent, Matrix *output);
  */
 Matrix *transpose(Matrix *mat, Matrix *output);
 
-Matrix *get_submatrix(Matrix *mat, Matrix *output);
- 
+/**
+ * @brief Get a submatrix from a Matrix
+ * 
+ * @param mat a pointer to a Matrix
+ * @param row_indices the indices of the rows which should not be included in the submatrix
+ * @param column_indices the indices of the columns which should not be included in the submatrix
+ * @param output an uninitialized pointer to a Matrix
+ * @return Matrix* the submatrix
+ */
+Matrix *get_submatrix(Matrix *mat, int row_indices, int column_indices, Matrix *output);
+
+double get_determinant(Matrix *mat);
+
+double get_trace(Matrix *mat);
+
+Matrix *get_inverse(Matrix *mat);
+
+void LU_decomposition(Matrix *mat, Matrix *L, Matrix *U);
+
+void QR_decomposition(Matrix *mat, Matrix *Q, Matrix *R);
+
+void SV_decomposition(Matrix *mat, Matrix *U, Matrix *SIG, Matrix *V);
+
+void eigenvalue_decomposition(Matrix *mat, Matrix *X, Matrix *LAM, Matrix *X_inv);
+
+
 #endif

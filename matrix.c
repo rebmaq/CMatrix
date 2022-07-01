@@ -14,6 +14,7 @@ Matrix *matrix_init(int rows, int columns, Matrix *mat)
     return mat;
 }
 
+//TODO: second row is 0 when creating an nx1 matrix
 void matrix_edit(Matrix *mat, double *data)
 {
     for(int i = 0; i < mat->number_of_rows; i++){
@@ -46,6 +47,7 @@ void matrix_del(Matrix *mat)
 {
     mat->number_of_rows = 0;
     mat->number_of_columns = 0;
+    free(mat->data[0]);
     free(mat->data);
     free(mat);
 }
@@ -90,7 +92,7 @@ void matrix_scale(Matrix *mat, double scalar)
     }
 }
 
-Matrix *add_matrices(Matrix *output, Matrix *mat1, Matrix *mat2)
+Matrix *add_matrices(Matrix *mat1, Matrix *mat2, Matrix *output)
 {
     if(size_check(mat1, mat2) != SAME_SIZE){
         return NULL;
@@ -101,6 +103,23 @@ Matrix *add_matrices(Matrix *output, Matrix *mat1, Matrix *mat2)
     for(int i = 0; i < mat1->number_of_rows; i++){
         for(int j = 0; j < mat1->number_of_columns; j++){
             output->data[i][j] = mat1->data[i][j] + mat2->data[i][j];
+        }
+    }
+
+    return output;
+}
+
+Matrix *subtract_matrices(Matrix *mat1, Matrix *mat2, Matrix *output)
+{
+    if(size_check(mat1, mat2) != SAME_SIZE){
+        return NULL;
+    }
+
+    output = matrix_init(mat1->number_of_rows, mat1->number_of_columns, output);
+
+    for(int i = 0; i < mat1->number_of_rows; i++){
+        for(int j = 0; j < mat1->number_of_columns; j++){
+            output->data[i][j] = mat1->data[i][j] - mat2->data[i][j];
         }
     }
 
@@ -132,6 +151,6 @@ Matrix *matrix_pow(Matrix *mat, int exponent, Matrix *output){
 
 }
 
-Matrix *transpose(Matrix *mat, Matrix *output){
+Matrix *get_submatrix(Matrix *mat, int row_indices, int column_indices, Matrix *output){
 
 }
