@@ -13,3 +13,4 @@ link:
 
 clean:
 	rm *.o
+	

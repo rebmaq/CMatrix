@@ -76,7 +76,7 @@ int size_check(Matrix *mat1, Matrix *mat2)
     if(mat1->number_of_rows == mat2->number_of_rows && mat1->number_of_columns == mat2->number_of_columns){
         return SAME_SIZE;
     }
-    // Matricies are m x n and n x m
+    // Matrices are m x n and n x m
     if(mat1->number_of_rows == mat2->number_of_columns && mat1->number_of_columns == mat2->number_of_rows){
         return SWAPPED_SIZE;
     }
