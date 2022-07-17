@@ -20,42 +20,52 @@ enum {SAME_SIZE = 1, SWAPPED_SIZE = 2};
  * 
  * @param rows number of rows of the Matrix
  * @param columns number of columns of the Matrix
- * @param mat a pointer to the Matrix
  * @return Matrix* the pointer to a newly allocated Matrix struct
  */
-Matrix *matrix_init(int rows, int columns, Matrix *mat);
+Matrix *matrix_init(int rows, int columns);
+
+/**
+ * @brief Creates a Matrix with all zeros
+ *
+ * @param rows number of rows of the Matrix
+ * @param columns number of columns of the Matrix
+ * @return Matrix* the pointer to a newly allocated Matrix struct
+ */
+Matrix* matrix_zeros(int rows, int columns);
 
 /**
  * @brief Updates all of the cells of the Matrix *mat
  * 
  * @param mat A pointer to the Matrix that will be updated
  * @param data A pointer to a list of numbers that will be added to the Matrix
+ * @return int 0 on success, -1 on error.
  */
-void matrix_edit(Matrix *mat, double *data);
+int matrix_edit(Matrix *mat, double *data);
 
 /**
  * @brief Copies the data from one Matrix to another
  * 
  * @param mat the Matrix to copy from
  * @param mat2 the Matrix to copy to
+ * @return int 0 on success, -1 on error.
  */
-void matrix_copy(Matrix *mat, Matrix *mat2);
+int matrix_copy(Matrix *mat, Matrix *mat2);
 
 /**
  * @brief Duplicates a Matrix
  * 
  * @param mat the Matrix to be duplicated
- * @param mat2 the pointer to the Matrix that will be instantiated 
  * @return Matrix* an instantiated duplicate Matrix
  */
-Matrix *matrix_dup(Matrix *mat, Matrix *mat2);
+Matrix *matrix_dup(Matrix *mat);
 
 /**
  * @brief Deletes and frees all related memory
  * 
  * @param mat the Matrix to be freed
+ * @return int 0 on success, -1 on error
  */
-void matrix_del(Matrix *mat);
+int matrix_del(Matrix *mat);
 
 /**
  * @brief Prints the values in a matrix
@@ -70,7 +80,8 @@ void matrix_print(Matrix *mat, int precision);
  * 
  * @param mat1 a pointer to a Matrix
  * @param mat2 a pointer to the Matrix to compare
- * @return int SAME_SIZE if they are the same size, SWAPPED_SIZE if they mat1 is m by n and mat2 is n by m, 0 otherwise
+ * @return int SAME_SIZE if they are the same size, SWAPPED_SIZE if they mat1 is m by n and mat2 is n by m, 
+ *   0 otherwise, and -1 on error
  */
 int size_check(Matrix *mat1, Matrix *mat2);
 
@@ -87,39 +98,40 @@ Matrix *get_identity(int n, Matrix* mat);
  * @brief Scales a matrix by a given scalar
  * 
  * @param mat a pointer to a Matrix
- * @param scalar the number by which the Matrix should be scaled 
+ * @param scale the number by which the Matrix should be scaled 
+ * @return int 0 on success, -1 on error
  */
-void matrix_scale(Matrix *mat, double scalar);
+int scale_matrix(Matrix *mat, double scale);
 
 /**
  * @brief Adds two Matrices
  * 
  * @param mat1 an n by m Matrix to be added
  * @param mat2 a n by m Matrix to be added
- * @param output an uninitialized pointer to a Matrix 
- * @return Matrix* the sum of mat1 and mat2
+ * @param output n by m destination matrix 
+ * @return int 0 on success, -1 on error
  */
-Matrix *add_matrices(Matrix *mat1, Matrix *mat2, Matrix *output);
+int add_matrices(Matrix *mat1, Matrix *mat2, Matrix *output);
 
 /**
  * @brief Subtracts two Matrices
  * 
  * @param mat1 an n by m Matrix from which to subtrct
  * @param mat2 a n by m Matrix to subtract
- * @param output an uninitialized pointer to a Matrix 
- * @return Matrix* the difference of mat1 and mat2
+ * @param output n by m destination matrix 
+ * @return int 0 on success, -1 on error
  */
-Matrix *subtract_matrices(Matrix *mat1, Matrix *mat2, Matrix *output);
+int subtract_matrices(Matrix *mat1, Matrix *mat2, Matrix *output);
 
 /**
  * @brief Multiplies two Matrices
  * 
  * @param mat1 an n by m Matrix
  * @param mat2 an m by p Matrix
- * @param output an uninitialized pointer to a Matrix 
- * @return Matrix* an n by p Matrix with the product of mat1 and mat2
+ * @param output n by p destination matrix
+ * @return int 0 on success, -1 on error
  */
-Matrix *multiply_matrices(Matrix *mat1, Matrix *mat2, Matrix *output);
+int multiply_matrices(Matrix *mat1, Matrix *mat2, Matrix *output);
 
 /**
  * @brief Raises a Matrix to a power

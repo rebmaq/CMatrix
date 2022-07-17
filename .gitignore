@@ -4,3 +4,8 @@
 *.dll
 mat
 main.c
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+CMatrix/
