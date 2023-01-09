@@ -1,16 +1,42 @@
-all: main matrix link
+CC := gcc
+SRCD := src
+TSTD := tests
+BLDD := build
+BIND := bin
+INCD := include
+LIBD := lib
 
-FLAGS=
+EXEC := main
 
-main: main.c
-	gcc $(FLAGS)main.c -o main.o -c
+MAIN := $(BLDD)/main.o
 
-matrix: matrix.c
-	gcc $(FLAGS)matrix.c -o matrix.o -c
+ALL_SRCF := $(wildcard $(SRCD)/*.c)
+ALL_LIBF := $(wildcard $(LIBD)/*.o)
+ALL_OBJF := $(patsubst $(SRCD)/%, $(BLDD)/%, $(ALL_SRCF:.c=.o))
+ALL_FUNCF := $(filter-out $(MAIN), $(ALL_OBJF))
 
-link:
-	gcc $(FLAGS)-o mat main.o matrix.o
+INC := -I $(INCD)
+
+LIBS := $(LIBD)
+
+CFLAGS :=
+
+.PHONY: clean all setup
+
+all: setup $(BIND)/$(EXEC)
+
+setup: $(BIND) $(BLDD)
+$(BIND):
+	mkdir -p $(BIND)
+
+$(BLDD):
+	mkdir -p $(BLDD)
+
+$(BIND)/$(EXEC): $(MAIN) $(ALL_FUNCF)
+	$(CC) $(MAIN) $(ALL_FUNCF) -o $(BIND)/$(EXEC) $(LIBS)/*.a
+
+$(BLDD)/%.o: $(SRCD)/%.c
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 clean:
-	rm *.o
-	
+	rm -rf $(BLDD) $(BIND)

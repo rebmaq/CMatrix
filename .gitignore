@@ -1,11 +1,10 @@
 .vs/
-*.o
-*.so
-*.dll
-mat
-main.c
+src/main.c
 *.sln
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.user
+.vscode/
 CMatrix/
+bin/
+build/
